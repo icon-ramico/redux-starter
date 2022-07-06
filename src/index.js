@@ -1,45 +1,41 @@
-import { compose, pipe } from 'lodash/fp';
-// npm i lodash.
+console.log('-----------------------Object Adjust------------------------------');
 
-const str = '     JavaScript        ';
-const trim = str => str.trim();
-const wrapInDiv = str => `<div>${str}</div>`;
-const toLowerCase = str => str.toLowerCase();
+const ali = { name: 'Ali' };
+const ali2 = { name: 'Ali' };
 
-// 2 parameters
-function add(a, b) {
-  return a + b;
-}
-// HOR Highier Order Functions
-function x(a) {
-  return function (b) {
-    return a + b;
-  };
-}
-{
-  /* <list data="aaa"> */
-}
+// NO:
+const aliCopy = ali;
+aliCopy.name = 'Alaa';
 
-const y = x(5)(6);
-console.log('add', add(5, 6), 'y', y);
+const updatedAli_assign = Object.assign({}, ali2, { age: 30 });
 
-const res1 = wrapInDiv(toLowerCase(trim(str))); // nesting/Object Composition
+// recommended
+const updatedAli_spread = { ...ali2, age: 40 };
 
-const transform = compose(wrapInDiv, toLowerCase, trim);
+console.log('incorrect update ali', { ali, aliCopy });
+console.log('correct update ali', { ali2, updatedAli_assign, updatedAli_spread });
 
-const res2 = transform(str);
+console.log('-----------------------Array Adjust------------------------------');
 
-const transform2 = pipe(trim, toLowerCase, wrapInDiv);
+const arr1 = [1, 2, 3];
 
-const res3 = transform2(str);
+// Add
 
-console.log('example 1', { res1, res2, res3 });
+const arr2 = [4, ...arr1];
+const arr3 = [...arr1, 4];
 
-// const wrapInSpan = str => `<span>${str}</span>`;
-// const wrap = (type, str) => `<${type}>${str}</${type}>`;
+const index = arr1.indexOf(2);
+const arr4 = [...arr1.slice(0, index), 4, ...arr1.slice(index)];
 
-const wrap = type => str => `<${type}>${str}</${type}>`;
+console.log('Array begin', arr2);
+console.log('Array end', arr3);
+console.log('Array middle', arr4);
 
-const transform3 = pipe(trim, toLowerCase, wrap('div'));
-const res4 = transform3(str);
-console.log({ res4 });
+// Remove
+const arr5 = arr1.filter(e => 2 !== e);
+console.log('Array remove', arr5);
+
+// update
+
+const arr6 = arr1.map(e => (2 === e ? 20 : e));
+console.log('Array update', arr6);
