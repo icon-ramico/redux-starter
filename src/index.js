@@ -44,4 +44,4 @@ const wrap = type => str => `<${type}>${str}</${type}>`;
 
 const transform3 = pipe(trim, toLowerCase, wrap('div'));
 const res4 = transform3(str);
-console.lo
+console.log({res4})
