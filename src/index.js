@@ -1,47 +1,41 @@
-import { compose, pipe } from 'lodash/fp';
-// npm i lodash.
+console.log('-----------------------Object Adjust------------------------------');
 
-console.log('-----------------------Functional programming------------------------------');
+const ali = { name: 'Ali' };
+const ali2 = { name: 'Ali' };
 
-const str = '     JavaScript        ';
-const trim = str => str.trim();
-const wrapInDiv = str => `<div>${str}</div>`;
-const toLowerCase = str => str.toLowerCase();
+// NO:
+const aliCopy = ali;
+aliCopy.name = 'Alaa';
 
-// 2 parameters
-function add(a, b) {
-  return a + b;
-}
-// HOR Highier Order Functions
-function x(a) {
-  return function (b) {
-    return a + b;
-  };
-}
-{
-  /* <list data="aaa"> */
-}
+const updatedAli_assign = Object.assign({}, ali2, { age: 30 });
 
-const y = x(5)(6);
-console.log('add', add(5, 6), 'y', y);
+// recommended
+const updatedAli_spread = { ...ali2, age: 40 };
 
-const res1 = wrapInDiv(toLowerCase(trim(str))); // nesting/Object Composition
+console.log('incorrect update ali', { ali, aliCopy });
+console.log('correct update ali', { ali2, updatedAli_assign, updatedAli_spread });
 
-const transform = compose(wrapInDiv, toLowerCase, trim);
+console.log('-----------------------Array Adjust------------------------------');
 
-const res2 = transform(str);
+const arr1 = [1, 2, 3];
 
-const transform2 = pipe(trim, toLowerCase, wrapInDiv);
+// Add
 
-const res3 = transform2(str);
+const arr2 = [4, ...arr1];
+const arr3 = [...arr1, 4];
 
-console.log('example 1', { res1, res2, res3 });
+const index = arr1.indexOf(2);
+const arr4 = [...arr1.slice(0, index), 4, ...arr1.slice(index)];
 
-// const wrapInSpan = str => `<span>${str}</span>`;
-// const wrap = (type, str) => `<${type}>${str}</${type}>`;
+console.log('Array begin', arr2);
+console.log('Array end', arr3);
+console.log('Array middle', arr4);
 
-const wrap = type => str => `<${type}>${str}</${type}>`;
+// Remove
+const arr5 = arr1.filter(e => 2 !== e);
+console.log('Array remove', arr5);
 
-const transform3 = pipe(trim, toLowerCase, wrap('div'));
-const res4 = transform3(str);
-console.lo
+// update
+
+const arr6 = arr1.map(e => (2 === e ? 20 : e));
+console.log('Array update', arr6);
