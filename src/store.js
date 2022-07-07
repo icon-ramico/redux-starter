@@ -8,9 +8,9 @@
 */
 
 import personReducer from './personReducer';
-import { createStore } from 'redux';
+import { createStore  } from 'redux';
 
 // export
-const store = createStore([personReducer]);
+const store = createStore ( personReducer );
 
 export default store;
